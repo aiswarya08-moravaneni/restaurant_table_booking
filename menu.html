@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Menu Page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Zilla+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <!-- CSS -->
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f1f5f8;
+        font-family: "Zilla Slab", serif;
+      }
+
+      h2 {
+        font-family: "Great Vibes", cursive;
+        font-size: 3rem;
+        text-align: center;
+        color: #ff6a23;
+        padding-top: 50px;
+      }
+
+      footer>h2 {
+        font-family: "Great Vibes", cursive;
+        font-size: 2rem;
+        text-align: center;
+        color: #964b29;
+      }
+
+      .menu {
+        margin-top: 20px;
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0;
+      }
+
+      .btn-item {
+        margin-left: 15px;
+      }
+
+      .photo {
+        width: 50%;
+        height: 230px;
+        object-fit: cover;
+        border: 0.25rem solid black;
+        border-radius: 10px;
+        box-shadow: -10px 10px 10px 0px rgba(0, 0, 0, 0.75);
+      }
+
+      .menu-items {
+        display: flex;
+        flex-direction: row; /* Horizontally align the image and text */
+        margin: 20px 0;
+        padding-right: 50px;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+      }
+
+      .menu-info {
+        margin-left: 20px;
+        width: 60%; /* Adjust the width for the text part */
+      }
+
+      .menu-title {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid black;
+      }
+
+      h4 {
+        color: #e00a00;
+      }
+
+      .menu-text {
+        padding-top: 10px;
+      }
+
+      footer {
+        margin-top: 50px;
+        position: relative;
+        bottom: 30px;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <section class="menu">
+        <!-- title -->
+        <div class="title">
+          <h2>My Restaurant Menu</h2>
+        </div>
+        <!-- filter buttons-->
+        <div class="btn-container">
+          <button class="btn btn-outline-dark btn-item" data-id="ALL">ALL</button>
+          <button class="btn btn-outline-dark btn-item" data-id="APPETIZERS">APPETIZERS</button>
+          <button class="btn btn-outline-dark btn-item" data-id="STEAKS">STEAK CUTS</button>
+          <button class="btn btn-outline-dark btn-item" data-id="SEAFOOD">SEAFOOD</button>
+          <button class="btn btn-outline-dark btn-item" data-id="SALADS">SALADS AND SOUPS</button>
+          <button class="btn btn-outline-dark btn-item" data-id="DESSERTS">DESSERTS</button>
+        </div>
+        <!-- menu items -->
+        <div class="section-center row">
+          <!-- Items will be dynamically generated here -->
+        </div>
+      </section>
+    </div>
+
+    <footer class="title">
+      <h2>My Restaurant Menu</h2>
+    </footer>
+
+    <script>
+      const menu = [
+        { id: 1, title: "Spicy Lobster", category: "APPETIZERS", price: 190.00, img: "spicy_lobster.jpeg", desc: "Ounce lobster tails, white wine, san marzano, red chile, olive oil." },
+        { id: 2, title: "Baked Escargot", category: "APPETIZERS", price: 160.00, img: "2.jpeg", desc: "White wine, escargots, parmesan cheese, butter, olive." },
+        { id: 3, title: "Seared Ahi Tuna", category: "APPETIZERS", price: 170.50, img: "3.avif", desc: "Ahi tuna, soy sauce, honey, toasted sesame oil, toasted sesame honey marinade." },
+        { id: 4, title: "Prosciutto Wrapped Mozarella", category: "APPETIZERS", price: 140.00, img: "4.webp", desc: "Balsamic vinegar, fresh mozzarella balls, grape tomatoes." },
+        { id: 5, title: "Filet Mignon, 8 ounce", category: "STEAKS", price: 380.00, img: "6", desc: "Filet mignon, rosemary, butter, olive oil, black pepper." },
+        { id: 6, title: "Filet Mignon, 12 ounce", category: "STEAKS", price: 490.00, img: "5", desc: "Filet mignon steaks, garlic, sea salt, fresh rosemary, black pepper." },
+        { id: 7, title: "Rib Eye Steak, 18 ounce", category: "STEAKS", price: 390.00, img: "7", desc: "Kansas City Steak Company signature cut Bone-in Ribeye Steak." },
+        { id: 8, title: "Stuffed Lobster Tail", category: "SEAFOOD", price: 180.50, img: "8", desc: "Lobster tails, jumbo lump crabmeat, lemon juice, garlic." },
+        { id: 9, title: "Maryland Crab Cake Dinner", category: "SEAFOOD", price: 160.00, img: "9", desc: "Old bay seasoning, lump crab meat, dijon mustard." },
+        { id: 10, title: "Whole Lobster", category: "SEAFOOD", price: 190.00, img: "10", desc: "Live maine lobster, butter, sea salt, lemon." },
+        { id: 11, title: "Spinach Salad", category: "SALADS", price: 90.50, img: "11", desc: "Fresh spinach, strawberries, walnuts, balsamic dressing, dried cranberries." },
+        { id: 12, title: "Caesar Salad", category: "SALADS", price: 70.00, img: "12", desc: "Romaine lettuce, parmesan cheese, Caesar dressing." },
+        { id: 13, title: "Tomato Basil Soup", category: "SALADS", price: 50.50, img: "13", desc: "Tomatoes, onions, garlic, cream, olive oil, basil." },
+        { id: 14, title: "Chocolate Lava Cake", category: "DESSERTS", price: 70.50, img: "14", desc: "Chocolate cake, molten chocolate center, vanilla ice cream." },
+        { id: 15, title: "Tiramisu", category: "DESSERTS", price: 60.00, img: "15", desc: "Coffee-soaked ladyfingers, mascarpone cream, cocoa powder." }
+      ];
+
+      const menuContainer = document.querySelector(".section-center");
+      const btnItems = document.querySelectorAll(".btn-item");
+
+      // Function to display items
+      function displayMenuItems(items) {
+        let displayMenu = items.map(function (item) {
+          return `
+            <div class="col-lg-12 col-sm-12 col-md-12 menu-items">
+              <img src="${item.img}" alt="${item.title}" class="photo" />
+              <div class="menu-info">
+                <div class="menu-title">
+                  <h4>${item.title}</h4>
+                        ${item.title === "Spicy Lobster" ? `<a href="file:///C:/MyProject/spicyLobster.html" target="_blank">${item.title}</a>` : item.title}
+
+                  <h4>Rs ${item.price}</h4>
+                </div>
+                <div class="menu-text">
+                  <p>${item.desc}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        displayMenu = displayMenu.join("");
+        menuContainer.innerHTML = displayMenu;
+      }
+
+      // Initial display of all items
+      displayMenuItems(menu);
+
+      // Filter menu based on category
+      btnItems.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          const category = e.target.dataset.id;
+          const filteredItems = menu.filter(function (item) {
+            if (category === "ALL") {
+              return item;
+            } else {
+              return item.category === category;
+            }
+          });
+          displayMenuItems(filteredItems);
+        });
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-c1kqX9pnEZoC5Az8zfiHg9xBIZUwI6chGJJt+Hpka7As9v2A9p44tBR5A24cCj+F" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-GLhlTQ8iRZGf+0v8I5I3lK6gStXa4jzih+Wv5J2u0lGxLzV6tYkzR9+Mztak9Gbm" crossorigin="anonymous"></script>
+  </body>
+</html>
